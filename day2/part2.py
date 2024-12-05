@@ -1,7 +1,7 @@
 import os
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-file_path = os.path.join(current_dir, "test_input.txt")
+file_path = os.path.join(current_dir, "input.txt")
 f = open(file_path, "r")
 init = f.readlines()
 lines = []
@@ -18,13 +18,15 @@ Brute Force: Could do an initial scan to see if line is safe without any alterat
 Is it guaranteed that if the first removal doesn't work, that the line is unsafe no matter what?
 Potential issue: If we try to damp at the very start, do we know that inc vs dec mode is accurate?
 Could be helpful to make each line a linked list, would make handling damps way easier
+Could try always removing left?
 """
 for line in nums:
     l, r = 0, 1
     mode = ""
-    damp_left_correction = False  # adjust left pointer
     damp = False  # will be true if we damp
     valid = True
+    if line == []:
+        print("Debug!")
     while r < len(line):
         left, right = line[l], line[r]
         if abs(right - left) > 3 or right == left:
@@ -130,4 +132,6 @@ for line in nums:
         r += 1
     if valid:
         safe += 1
+    else:
+        print(line)
 print(safe)
