@@ -18,7 +18,9 @@ Brute Force: Could do an initial scan to see if line is safe without any alterat
 Is it guaranteed that if the first removal doesn't work, that the line is unsafe no matter what?
 Potential issue: If we try to damp at the very start, do we know that inc vs dec mode is accurate?
 Could be helpful to make each line a linked list, would make handling damps way easier
-Could try always removing left?
+Could try always removing left? - Issue could attempt to Damp when l = 0
+Right bias: 554
+Left bias: 533
 """
 for line in nums:
     l, r = 0, 1
@@ -37,10 +39,13 @@ for line in nums:
                 if mode == "inc":
                     # Inc Damp
                     damp = True
-                    r += 1
-                    if r >= len(line):
-                        break
-                    right = line[r]
+                    l -= 1
+                    if l < 0:
+                        # TODO
+                        l += 2
+                        r += 1
+                        right = line[r]
+                    left = line[l]
                     if right > left and abs(right - left) <= 3:
                         # Successful Damp
                         l += 1
@@ -51,10 +56,13 @@ for line in nums:
                 elif mode == "dec":
                     # Dec Damp
                     damp = True
-                    r += 1
-                    if r >= len(line):
-                        break
-                    right = line[r]
+                    l -= 1
+                    if l < 0:
+                        # TODO
+                        l += 2
+                        r += 1
+                        right = line[r]
+                    left = line [l]
                     if right < left and abs(right - left) <= 3:
                         # Successful Damp
                         l += 1
@@ -65,10 +73,13 @@ for line in nums:
                 else:
                     # Ambiguous Damp
                     damp = True
-                    r += 1
-                    if r >= len(line):  # This shouldn't happen
-                        break
-                    right = line[r]
+                    l -= 1
+                    if l < 0:
+                        # TODO
+                        l += 2
+                        r += 1
+                        right = line[r]
+                    left = line[l]
                     if abs(right - left) > 3:
                         # Failed Damp
                         valid = False
@@ -98,10 +109,13 @@ for line in nums:
                 else:
                     # Inc Damp
                     damp = True
-                    r += 1
-                    if r >= len(line):
-                        break
-                    right = line[r]
+                    l -= 1
+                    if l < 0:
+                        # TODO
+                        l += 2
+                        r += 1
+                        right = line[r]
+                    left = line[l]
                     if right > left and abs(right - left) <= 3:
                         # Successful Damp
                         l += 1
@@ -117,10 +131,13 @@ for line in nums:
                 else:
                     # Dec Damp
                     damp = True
-                    r += 1
-                    if r >= len(line):
-                        break
-                    right = line[r]
+                    l -= 1
+                    if l < 0:
+                        # TODO
+                        l += 2
+                        r += 1
+                        right = line[r]
+                    left = line[l]
                     if right < left and abs(right - left) <= 3:
                         # Successful Damp
                         l += 1
