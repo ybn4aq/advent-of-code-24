@@ -31,10 +31,15 @@ for i in range(length):
     matches = re.findall(pattern, col)
     ret += len(matches)
 # DIAGONALS
+for k in range(length):
+    pass
+
+
 for i in range(length):
     diag = ""
     for j in range(i, length):
         diag += puzzle[j][j]
+        print(j,j)
     print(diag)
 
 
